@@ -25,7 +25,7 @@ end
 
 def get_order order_key
   raise "Order Key can not be blank!" if order_key.nil? || order_key == ''
-  order_uri = URI("https://www.humblebundle.com/api/v1/order/#{order_key}?ajax=true'")
+  order_uri = URI("https://www.humblebundle.com/api/v1/order/#{order_key}?ajax=true")
 
   res = make_request order_uri  
 
@@ -48,11 +48,16 @@ def find_correct_download subproduct
   download_struct
 end
 
-AUTH_TOKEN = '"<ENTER YOUR TOKEN>"'
+def get_auth_token
+  file = File.open(".key", "rb")
+  file.read
+end
+
+AUTH_TOKEN = get_auth_token
 DOWNLOAD_FOLDER = './download'
 DOWNLOAD_LIMIT = 10
-DEFAULT_FILE_TYPE =  'EPUB'
-BACKUP_FILE_TYPE = 'PDF'
+DEFAULT_FILE_TYPE =  'CBZ'
+BACKUP_FILE_TYPE = '***'
 
 #Make sure DOWNLOAD_FOLDER
 FileUtils::mkdir_p DOWNLOAD_FOLDER
